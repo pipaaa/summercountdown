@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cuenta Regresiva para el Verano</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f7f7f7;
+      text-align: center;
+      padding-top: 100px;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    .countdown {
+      font-size: 60px;
+      margin-top: 40px;
+      color: #333;
+    }
+
+    .message {
+      font-size: 30px;
+      margin-top: 20px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <h1>Cuenta Regresiva para el Verano</h1>
+  <div class="countdown" id="countdown"></div>
+  <div class="message">¡El verano está llegando pronto!</div>
+
+  <script>
+    // Establecer la fecha objetivo (21 de junio)
+    var targetDate = new Date('June 21, 2023 00:00:00').getTime();
+
+    // Actualizar la cuenta regresiva cada segundo
+    var countdown = setInterval(function() {
+      // Obtener la fecha y hora actual
+      var now = new Date().getTime();
+
+      // Calcular la diferencia entre la fecha objetivo y la fecha actual
+      var difference = targetDate - now;
+
+      // Calcular los días, horas, minutos y segundos restantes
+      var days = Math.floor(difference / (1000 * 60 * 60 * 24));
+      var hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+      // Mostrar el tiempo restante en el elemento con el ID 'countdown'
+      document.getElementById('countdown').innerHTML = days + 'd ' + hours + 'h ' + minutes + 'm ' + seconds + 's ';
+
+      // Si la cuenta regresiva ha terminado, mostrar un mensaje
+      if (difference < 0) {
+        clearInterval(countdown);
+        document.getElementById('countdown').innerHTML = '¡El verano está aquí!';
+      }
+    }, 1000);
+  </script>
+</body>
+</html>
