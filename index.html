@@ -1,208 +1,101 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Juego de la Serpiente</title>
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
+  <title>Cuenta Regresiva para el Verano</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-image: url('summer.wall.jpg');
+      background-size: cover;
+      background-position: center;
+      text-align: center;
+      padding-top: 100px;
+    }
 
-        #game-board {
-            width: 300px;
-            height: 300px;
-            border: 1px solid black;
-            display: grid;
-            grid-template-columns: repeat(20, 1fr);
-        }
+    h1 {
+      color: #fff;
+    }
 
-        .cell {
-            background-color: #f2f2f2;
-            border: 1px solid #e0e0e0;
-        }
+    .countdown {
+      font-size: 60px;
+      margin-top: 40px;
+      color: #fff;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
 
-        .cell.snake {
-            background-color: green;
-        }
+    .message {
+      font-size: 30px;
+      margin-top: 20px;
+      color: #fff;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
 
-        .cell.food {
-            background-color: red;
-        }
-    </style>
-    <script>
-        window.addEventListener('DOMContentLoaded', (event) => {
-            const gameBoard = document.getElementById('game-board');
-            const gridSize = 20;
-            const cells = [];
+    .video-container {
+      margin-top: 40px;
+    }
 
-            let snake = [{ x: 10, y: 10 }];
-            let food = { x: 5, y: 5 };
-            let direction = 'right';
-            let intervalId;
+    .video-container video {
+      width: 560px;
+      height: 315px;
+    }
 
-            function createGameBoard() {
-                for (let row = 0; row < gridSize; row++) {
-                    for (let col = 0; col < gridSize; col++) {
-                        const cell = document.createElement('div');
-                        cell.classList.add('cell');
-                        cells.push(cell);
-                        gameBoard.appendChild(cell);
-                    }
-                }
-            }
+    footer {
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 14px;
+      color: #777;
+      margin-top: 20px;
+    }
 
-            function drawSnake() {
-                snake.forEach((segment) => {
-                    const index = segment.x + segment.y * gridSize;
-                    cells[index].classList.add('snake');
-                });
-            }
-
-            function eraseSnake() {
-                snake.forEach((segment) => {
-                    const index = segment.x + segment.y * gridSize;
-                    cells[index].classList.remove('snake');
-                });
-            }
-
-            function drawFood() {
-                const index = food.x + food.y * gridSize;
-                cells[index].classList.add('food');
-            }
-
-            function eraseFood() {
-                const index = food.x + food.y * gridSize;
-                cells[index].classList.remove('food');
-            }
-
-            function handleKeydown(event) {
-                const key = event.key;
-                if (key === 'ArrowUp' && direction !== 'down') {
-                    direction = 'up';
-                } else if (key === 'ArrowDown' && direction !== 'up') {
-                    direction = 'down';
-                } else if (key === 'ArrowLeft' && direction !== 'right') {
-                    direction = 'left';
-                } else if (key === 'ArrowRight' && direction !== 'left') {
-                    direction = 'right';
-                }
-            }
-
-            function handleTouchStart(event) {
-                const touch = event.touches[0];
-                startX = touch.clientX;
-                startY = touch.clientY;
-            }
-
-            function handleTouchMove(event) {
-                if (!startX || !startY) {
-                    return;
-                }
-
-                const touch = event.touches[0];
-                const deltaX = touch.clientX - startX;
-                const deltaY = touch.clientY - startY;
-
-                if (Math.abs(deltaX) > Math.abs(deltaY)) {
-                    if (deltaX > 0 && direction !== 'left') {
-                        direction = 'right';
-                    } else if (deltaX < 0 && direction !== 'right') {
-                        direction = 'left';
-                    }
-                } else {
-                    if (deltaY > 0 && direction !== 'up') {
-                        direction = 'down';
-                    } else if (deltaY < 0 && direction !== 'down') {
-                        direction = 'up';
-                    }
-                }
-
-                startX = null;
-                startY = null;
-            }
-
-            function moveSnake() {
-                const head = { ...snake[0] };
-
-                if (direction === 'up') {
-                    head.y--;
-                } else if (direction === 'down') {
-                    head.y++;
-                } else if (direction === 'left') {
-                    head.x--;
-                } else if (direction === 'right') {
-                    head.x++;
-                }
-
-                snake.unshift(head);
-
-                const hasEatenFood = head.x === food.x && head.y === food.y;
-
-                if (hasEatenFood) {
-                    generateFood();
-                } else {
-                    snake.pop();
-                }
-            }
-
-            function generateFood() {
-                const newFood = {
-                    x: Math.floor(Math.random() * gridSize),
-                    y: Math.floor(Math.random() * gridSize)
-                };
-
-                const snakeOnFood = snake.some(segment =>
-                    segment.x === newFood.x && segment.y === newFood.y
-                );
-
-                if (snakeOnFood) {
-                    return generateFood();
-                }
-
-                food = newFood;
-            }
-
-            function gameOver() {
-                clearInterval(intervalId);
-                alert('Game Over');
-            }
-
-            function startGame() {
-                createGameBoard();
-                drawSnake();
-                drawFood();
-                intervalId = setInterval(() => {
-                    eraseSnake();
-                    moveSnake();
-                    if (checkCollision()) {
-                        gameOver();
-                    }
-                    drawSnake();
-                }, 200);
-            }
-
-            function checkCollision() {
-                const head = snake[0];
-                return (
-                    head.x < 0 ||
-                    head.x >= gridSize ||
-                    head.y < 0 ||
-                    head.y >= gridSize ||
-                    snake.some((segment, index) => index !== 0 && segment.x === head.x && segment.y === head.y)
-                );
-            }
-
-            document.addEventListener('keydown', handleKeydown);
-            gameBoard.addEventListener('touchstart', handleTouchStart);
-            gameBoard.addEventListener('touchmove', handleTouchMove);
-
-            startGame();
-        });
-    </script>
+    .rights-reserved {
+      font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
-    <div id="game-board"></div>
+  <h1>Cuenta Regresiva para el Verano</h1>
+  <div class="countdown" id="countdown"></div>
+  <div class="message">¡El verano está llegando pronto!</div>
+
+  <div class="video-container">
+    <h2>Canción del Verano</h2>
+    <video id="local-video" controls>
+      <source src="video.mp4" type="video/mp4">
+      Tu navegador no admite el elemento de video.
+    </video>
+  </div>
+
+  <footer>
+    <p class="rights-reserved">© 2023. Todos los derechos reservados.</p>
+  </footer>
+
+  <script>
+    // Establecer la fecha objetivo (21 de junio)
+    var targetDate = new Date('June 21, 2023 00:00:00').getTime();
+
+    // Actualizar la cuenta regresiva cada segundo
+    var countdown = setInterval(function() {
+      // Obtener la fecha y hora actual
+      var now = new Date().getTime();
+
+      // Calcular la diferencia entre la fecha objetivo y la fecha actual
+      var difference = targetDate - now;
+
+      // Calcular los días, horas, minutos y segundos restantes
+      var days = Math.floor(difference / (1000 * 60 * 60 * 24));
+      var hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+      // Mostrar el tiempo restante en el elemento con el ID 'countdown'
+      document.getElementById('countdown').innerHTML = days + 'd ' + hours + 'h ' + minutes + 'm ' + seconds + 's ';
+
+      // Si la cuenta regresiva ha terminado, mostrar un mensaje
+      if (difference < 0) {
+        clearInterval(countdown);
+        document.getElementById('countdown').innerHTML = '¡El verano está aquí!';
+      }
+    }, 1000);
+  </script>
 </body>
 </html>
