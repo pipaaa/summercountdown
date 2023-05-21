@@ -43,12 +43,15 @@
 
     .video-title {
       position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+      top: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
       color: #fff;
       font-size: 24px;
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 10px;
     }
 
     footer {
@@ -98,15 +101,15 @@
   <div class="message">¡El verano está llegando pronto!</div>
 
   <div class="video-container">
-    <h2 class="video-title">Canción del Verano</h2>
     <video id="local-video" controls autoplay loop>
       <source src="video.mp4" type="video/mp4">
       Tu navegador no admite el elemento de video.
     </video>
+    <h2 class="video-title">Canción del Verano</h2>
   </div>
 
   <footer>
-    <p class="rights-reserved">&copy; 2023. Todos los derechos reservados.</p>
+    <p class="rights-reserved">© 2023. Todos los derechos reservados.</p>
   </footer>
 
   <script>
