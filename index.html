@@ -43,6 +43,12 @@
       margin-top: 10px;
     }
 
+    .vote-count {
+      margin-top: 5px;
+      font-size: 18px;
+      color: #777;
+    }
+
     footer {
       font-family: "Helvetica Neue", Arial, sans-serif;
       font-size: 14px;
@@ -67,14 +73,17 @@
       <div class="option">
         <video src="video1.mp4" controls></video>
         <button class="vote-button" onclick="vote(1)" id="vote-button-1">Votar</button>
+        <div class="vote-count" id="vote-count-1">0 votos</div>
       </div>
       <div class="option">
         <video src="video2.mp4" controls></video>
         <button class="vote-button" onclick="vote(2)" id="vote-button-2">Votar</button>
+        <div class="vote-count" id="vote-count-2">0 votos</div>
       </div>
       <div class="option">
         <video src="video3.mp4" controls></video>
         <button class="vote-button" onclick="vote(3)" id="vote-button-3">Votar</button>
+        <div class="vote-count" id="vote-count-3">0 votos</div>
       </div>
     </div>
   </div>
@@ -83,3 +92,43 @@
     <p class="rights-reserved">© 2023. Todos los derechos reservados.</p>
   </footer>
 
+  <script>
+    // Establecer la fecha objetivo (21 de junio)
+    var targetDate = new Date('June 21, 2023 00:00:00').getTime();
+
+    // Actualizar la cuenta regresiva cada segundo
+    var countdown = setInterval(function() {
+      // Obtener la fecha y hora actual
+      var now = new Date().getTime();
+
+      // Calcular la diferencia entre la fecha objetivo y la fecha actual
+      var difference = targetDate - now;
+
+      // Calcular los días, horas, minutos y segundos restantes
+      var days = Math.floor(difference / (1000 * 60 * 60 * 24));
+      var hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+      // Mostrar el tiempo restante en el elemento con el ID 'countdown'
+      document.getElementById('countdown').innerHTML = days + 'd ' + hours + 'h ' + minutes + 'm ' + seconds + 's ';
+      
+      // Si la cuenta regresiva ha terminado, mostrar un mensaje
+      if (difference < 0) {
+        clearInterval(countdown);
+        document.getElementById('countdown').innerHTML = '¡El verano está aquí!';
+      }
+    }, 1000);
+
+    // Función de voto
+    function vote(option) {
+      var voteButton = document.getElementById('vote-button-' + option);
+      voteButton.disabled = true; // Desactivar el botón después de votar
+
+      var voteCount = document.getElementById('vote-count-' + option);
+      var currentVotes = parseInt(voteCount.innerHTML);
+      voteCount.innerHTML = (currentVotes + 1) + ' votos';
+    }
+  </script>
+</body>
+</html>
