@@ -33,11 +33,6 @@
     .video-container {
       margin-top: 40px;
     }
-
-    .video-container iframe {
-      width: 560px;
-      height: 315px;
-    }
   </style>
 </head>
 <body>
@@ -46,14 +41,17 @@
   <div class="message">¡El verano está llegando pronto!</div>
 
   <div class="video-container">
-    <iframe id="youtube-video" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <video id="local-video" controls>
+      <source src="nombre_del_video.mp4" type="video/mp4">
+      Tu navegador no admite el elemento de video.
+    </video>
   </div>
 
   <script>
     // Establecer la fecha objetivo (21 de junio)
     var targetDate = new Date('June 21, 2023 00:00:00').getTime();
 
-    // Actualizar la cuenta regresiva y el video cada segundo
+    // Actualizar la cuenta regresiva cada segundo
     var countdown = setInterval(function() {
       // Obtener la fecha y hora actual
       var now = new Date().getTime();
@@ -75,32 +73,7 @@
         clearInterval(countdown);
         document.getElementById('countdown').innerHTML = '¡El verano está aquí!';
       }
-
-      // Cambiar el video cada 24 horas
-      var hoursPassed = Math.floor((now - targetDate) / (1000 * 60 * 60));
-      if (hoursPassed % 24 === 0) {
-        changeVideo();
-      }
     }, 1000);
-
-    // Cambiar el video de YouTube
-    function changeVideo() {
-      // Lista de URLs de videos de YouTube
-      var videoUrls = [
-'https://www.youtube.com/watch?v=Il6_5eoRMCc',
-'https://www.youtube.com/watch?v=6-h9N3D3v-Y',
-'https://www.youtube.com/watch?v=U8QTUfFHyAk'
-      ];
-
-      // Obtener un índice aleatorio para seleccionar un video de la lista
-      var randomIndex = Math.floor(Math.random() * videoUrls.length);
-
-      // Obtener el elemento del video de YouTube
-      var youtubeVideo = document.getElementById('youtube-video');
-
-      // Actualizar la URL del video
-      youtubeVideo.src = videoUrls[randomIndex];
-    }
   </script>
 </body>
 </html>
