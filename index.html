@@ -39,16 +39,6 @@
       height: 315px;
     }
 
-    .vote-button {
-      margin-top: 10px;
-    }
-
-    .vote-count {
-      margin-top: 5px;
-      font-size: 18px;
-      color: #777;
-    }
-
     footer {
       font-family: "Helvetica Neue", Arial, sans-serif;
       font-size: 14px;
@@ -69,23 +59,10 @@
 
   <div class="video-container">
     <h2>Canción del Verano</h2>
-    <div id="vote-options">
-      <div class="option">
-        <video src="video1.mp4" controls></video>
-        <button class="vote-button" onclick="vote(1)" id="vote-button-1">Votar</button>
-        <div class="vote-count" id="vote-count-1">0 votos</div>
-      </div>
-      <div class="option">
-        <video src="video2.mp4" controls></video>
-        <button class="vote-button" onclick="vote(2)" id="vote-button-2">Votar</button>
-        <div class="vote-count" id="vote-count-2">0 votos</div>
-      </div>
-      <div class="option">
-        <video src="video3.mp4" controls></video>
-        <button class="vote-button" onclick="vote(3)" id="vote-button-3">Votar</button>
-        <div class="vote-count" id="vote-count-3">0 votos</div>
-      </div>
-    </div>
+    <video id="local-video" controls>
+      <source src="video.mp4" type="video/mp4">
+      Tu navegador no admite el elemento de video.
+    </video>
   </div>
 
   <footer>
@@ -112,23 +89,13 @@
 
       // Mostrar el tiempo restante en el elemento con el ID 'countdown'
       document.getElementById('countdown').innerHTML = days + 'd ' + hours + 'h ' + minutes + 'm ' + seconds + 's ';
-      
+
       // Si la cuenta regresiva ha terminado, mostrar un mensaje
       if (difference < 0) {
         clearInterval(countdown);
         document.getElementById('countdown').innerHTML = '¡El verano está aquí!';
       }
     }, 1000);
-
-    // Función de voto
-    function vote(option) {
-      var voteButton = document.getElementById('vote-button-' + option);
-      voteButton.disabled = true; // Desactivar el botón después de votar
-
-      var voteCount = document.getElementById('vote-count-' + option);
-      var currentVotes = parseInt(voteCount.innerHTML);
-      voteCount.innerHTML = (currentVotes + 1) + ' votos';
-    }
   </script>
 </body>
 </html>
