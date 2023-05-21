@@ -83,6 +83,11 @@
     <p class="rights-reserved">© 2023. Todos los derechos reservados.</p>
   </footer>
 
+  <audio autoplay loop>
+    <source src="musica.mp3" type="audio/mpeg">
+    Tu navegador no admite el elemento de audio.
+  </audio>
+
   <script>
     // Establecer la fecha objetivo (21 de junio)
     var targetDate = new Date('June 21, 2023 00:00:00').getTime();
@@ -111,7 +116,13 @@
       }
     }, 1000);
   </script>
-  
-  <audio src="musica.mp3" autoplay loop></audio>
+
+  <script>
+    // Obtener el elemento de audio
+    var audio = document.getElementsByTagName('audio')[0];
+    
+    // Establecer el volumen al máximo
+    audio.volume = 1;
+  </script>
 </body>
 </html>
