@@ -39,17 +39,15 @@
     .video-container video {
       width: 560px;
       height: 315px;
-      background-color: #000;
     }
 
     .video-title {
       position: absolute;
-      top: -30px;
-      left: 0;
-      right: 0;
-      margin: auto;
-      color: #fff;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       font-size: 24px;
+      color: #fff;
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     }
 
@@ -58,39 +56,18 @@
       font-size: 14px;
       color: #777;
       margin-top: 20px;
+      background-color: #fff;
       padding: 10px;
     }
 
     .rights-reserved {
       font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
       font-weight: bold;
-      font-size: 16px;
-      margin: 0;
-      background-color: #fff;
-      display: inline-block;
-      padding: 5px 10px;
     }
 
-    /* Estilos para las serpentinas */
-    .confetti {
-      width: 10px;
-      height: 10px;
-      background-color: #ffef94;
-      position: absolute;
-      top: -10px;
-      animation: confetti-fall linear infinite;
-    }
-
-    /* Animación para que las serpentinas caigan */
-    @keyframes confetti-fall {
-      0% {
-        transform: translateY(-200px) rotate(0deg);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(100vh) rotate(1080deg);
-        opacity: 0;
-      }
+    /* Estilos para ocultar los controles del video */
+    video {
+      outline: none;
     }
   </style>
 </head>
@@ -100,7 +77,7 @@
   <div class="message">¡El verano está llegando pronto!</div>
 
   <div class="video-container">
-    <video id="local-video" controls autoplay loop>
+    <video id="local-video" autoplay loop>
       <source src="video.mp4" type="video/mp4">
       Tu navegador no admite el elemento de video.
     </video>
@@ -138,25 +115,6 @@
         document.getElementById('countdown').innerHTML = '¡El verano está aquí!';
       }
     }, 1000);
-
-    // Crear serpentinas cada 200ms
-    setInterval(function() {
-      createConfetti();
-    }, 200);
-
-    // Crear una serpentina en una posición y velocidad aleatorias
-    function createConfetti() {
-      var confetti = document.createElement('div');
-      confetti.className = 'confetti';
-      confetti.style.left = Math.random() * 100 + '%';
-      confetti.style.animationDuration = Math.random() * 3 + 2 + 's';
-      document.body.appendChild(confetti);
-
-      // Eliminar la serpentina después de que haya caído
-      confetti.addEventListener('animationend', function() {
-        confetti.parentNode.removeChild(confetti);
-      });
-    }
   </script>
 </body>
 </html>
