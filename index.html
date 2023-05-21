@@ -33,6 +33,23 @@
     .video-container {
       margin-top: 40px;
     }
+
+    .video-container video {
+      width: 560px;
+      height: 315px;
+    }
+
+    footer {
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 14px;
+      color: #777;
+      margin-top: 20px;
+    }
+
+    .rights-reserved {
+      font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
@@ -41,11 +58,16 @@
   <div class="message">¡El verano está llegando pronto!</div>
 
   <div class="video-container">
+    <h2>Canción del Verano</h2>
     <video id="local-video" controls>
       <source src="video.mp4" type="video/mp4">
       Tu navegador no admite el elemento de video.
     </video>
   </div>
+
+  <footer>
+    <p class="rights-reserved">© 2023. Todos los derechos reservados.</p>
+  </footer>
 
   <script>
     // Establecer la fecha objetivo (21 de junio)
