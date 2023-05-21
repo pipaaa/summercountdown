@@ -33,6 +33,11 @@
     .video-container {
       margin-top: 40px;
     }
+
+    .video-container iframe {
+      width: 560px;
+      height: 315px;
+    }
   </style>
 </head>
 <body>
@@ -41,7 +46,7 @@
   <div class="message">¡El verano está llegando pronto!</div>
 
   <div class="video-container">
-    <iframe id="youtube-video" width="560" height="315" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    <iframe id="youtube-video" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
   </div>
 
   <script>
@@ -82,9 +87,9 @@
     function changeVideo() {
       // Lista de URLs de videos de YouTube
       var videoUrls = [
-        'https://www.youtube.com/watch?v=Il6_5eoRMCc',
-        'https://www.youtube.com/watch?v=6-h9N3D3v-Y',
-        'https://www.youtube.com/watch?v=U8QTUfFHyAk'
+'https://www.youtube.com/watch?v=Il6_5eoRMCc',
+'https://www.youtube.com/watch?v=6-h9N3D3v-Y',
+'https://www.youtube.com/watch?v=U8QTUfFHyAk'
       ];
 
       // Obtener un índice aleatorio para seleccionar un video de la lista
