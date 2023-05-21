@@ -2,7 +2,6 @@
 <html>
 <head>
   <title>Summer Countdown</title>
-  <link rel="icon" type="image/jpg" href="icono.jpg">
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -41,13 +40,13 @@
       height: 315px;
     }
 
-    .video-title {
+    .video-container h2 {
+      color: #fff;
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
       font-size: 24px;
-      color: #fff;
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     }
 
@@ -63,6 +62,7 @@
     .rights-reserved {
       font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
       font-weight: bold;
+      font-size: 16px;
     }
   </style>
 </head>
@@ -72,14 +72,12 @@
   <div class="message">¡El verano está llegando pronto!</div>
 
   <div class="video-container">
-    <video id="local-video" autoplay loop>
+    <h2>Canción del Verano</h2>
+    <video id="local-video" autoplay loop muted>
       <source src="video.mp4" type="video/mp4">
       Tu navegador no admite el elemento de video.
     </video>
-    <h2 class="video-title">Canción del Verano</h2>
   </div>
-
-  <audio src="musica.mp3" autoplay loop></audio>
 
   <footer>
     <p class="rights-reserved">© 2023. Todos los derechos reservados.</p>
@@ -113,5 +111,7 @@
       }
     }, 1000);
   </script>
+  
+  <audio src="musica.mp3" autoplay loop></audio>
 </body>
 </html>
