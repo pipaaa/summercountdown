@@ -3,75 +3,44 @@
 <head>
   <title>Summer Countdown</title>
   <style>
+    /* Estilos CSS anteriores */
+
     body {
-      font-family: Arial, sans-serif;
-      background-image: url('summer.wall.jpg');
-      background-size: cover;
-      background-position: center;
-      text-align: center;
-      padding-top: 100px;
       overflow: hidden; /* Evitar que el confeti se desborde */
     }
 
-    h1 {
-      color: #fff;
-    }
-
-    .countdown {
-      font-size: 60px;
-      margin-top: 40px;
-      color: #fff;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    }
-
-    .message {
-      font-size: 30px;
-      margin-top: 20px;
-      color: #fff;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    }
-
-    .video-container {
-      margin-top: 40px;
-      position: relative;
-    }
-
-    .video-container video {
-      width: 560px;
-      height: 315px;
-    }
-
-    .video-container h2 {
-      color: #fff;
+    .confetti {
       position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 24px;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      width: 10px;
+      height: 10px;
+      background-color: yellow;
+      border-radius: 50%;
+      animation: fall linear infinite;
     }
 
-    footer {
-      font-family: "Helvetica Neue", Arial, sans-serif;
-      font-size: 14px;
-      color: #777;
-      margin-top: 20px;
-      background-color: #fff;
-      padding: 10px;
-    }
-
-    .rights-reserved {
-      font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-      font-weight: bold;
-      font-size: 16px;
+    @keyframes fall {
+      0% {
+        transform: translate(0, -100vh);
+      }
+      100% {
+        transform: translate(0, 100vh);
+      }
     }
   </style>
-  <script src="https://cdn.jsdelivr.net/npm/confetti-js/dist/index.min.js"></script>
 </head>
 <body>
   <h1>Summer Countdown</h1>
   <div class="countdown" id="countdown"></div>
   <div class="message">¡El verano está llegando pronto!</div>
+
+  <div class="confetti-container">
+    <!-- Aquí puedes agregar más elementos div con la clase "confetti" para tener más confetis -->
+    <div class="confetti"></div>
+    <div class="confetti"></div>
+    <div class="confetti"></div>
+    <div class="confetti"></div>
+    <div class="confetti"></div>
+  </div>
 
   <div class="video-container">
     <h2>Canción del Verano</h2>
@@ -118,15 +87,22 @@
       }
     }, 1000);
 
-    // Generar confeti con forma de sol
-    var confettiSettings = {
-      target: 'confetti-container',
-      max: 50, // Cambiar este valor para controlar la cantidad de confeti
-      size: 1,
-      rotate: true
-    };
-    var confetti = new ConfettiGenerator(confettiSettings);
-    confetti.render();
+    // Generar confeti cayendo
+    var confettiContainer = document.querySelector('.confetti-container');
+
+    function createConfetti() {
+      var confetti = document.createElement('div');
+      confetti.className = 'confetti';
+      confetti.style.left = Math.random() * 100 + 'vw';
+      confetti.style.animationDuration = Math.random() * 3 + 2 + 's';
+      confettiContainer.appendChild(confetti);
+
+      setTimeout(function() {
+        confetti.remove();
+      }, 5000);
+    }
+
+    setInterval(createConfetti, 200);
 
   </script>
 </body>
