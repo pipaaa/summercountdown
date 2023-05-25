@@ -3,10 +3,75 @@
 <head>
   <title>Summer Countdown</title>
   <style>
-    /* Estilos CSS anteriores */
-
     body {
+      font-family: Arial, sans-serif;
+      background-image: url('summer.wall.jpg');
+      background-size: cover;
+      background-position: center;
+      text-align: center;
+      padding-top: 100px;
       overflow: hidden; /* Evitar que el confeti se desborde */
+    }
+
+    h1 {
+      color: #fff;
+    }
+
+    .countdown {
+      font-size: 60px;
+      margin-top: 40px;
+      color: #fff;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .message {
+      font-size: 30px;
+      margin-top: 20px;
+      color: #fff;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .video-container {
+      margin-top: 40px;
+      position: relative;
+    }
+
+    .video-container video {
+      width: 560px;
+      height: 315px;
+    }
+
+    .video-container h2 {
+      color: #fff;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 24px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    footer {
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 14px;
+      color: #777;
+      margin-top: 20px;
+      background-color: #fff;
+      padding: 10px;
+    }
+
+    .rights-reserved {
+      font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .confetti-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
     }
 
     .confetti {
@@ -33,14 +98,7 @@
   <div class="countdown" id="countdown"></div>
   <div class="message">¡El verano está llegando pronto!</div>
 
-  <div class="confetti-container">
-    <!-- Aquí puedes agregar más elementos div con la clase "confetti" para tener más confetis -->
-    <div class="confetti"></div>
-    <div class="confetti"></div>
-    <div class="confetti"></div>
-    <div class="confetti"></div>
-    <div class="confetti"></div>
-  </div>
+  <div class="confetti-container"></div>
 
   <div class="video-container">
     <h2>Canción del Verano</h2>
