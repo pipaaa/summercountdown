@@ -64,6 +64,26 @@
       font-weight: bold;
       font-size: 16px;
     }
+
+    /* Estilos para las serpentinas */
+    .sun-confetti {
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      background: yellow;
+      border-radius: 50%;
+      animation: fall 8s infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-100px);
+      }
+      100% {
+        transform: translateY(100vh);
+      }
+    }
   </style>
 </head>
 <body>
@@ -87,6 +107,18 @@
     <source src="musica.mp3" type="audio/mpeg">
     Tu navegador no admite el elemento de audio.
   </audio>
+
+  <!-- Serpentinas con forma de sol -->
+  <div class="sun-confetti"></div>
+  <div class="sun-confetti"></div>
+  <div class="sun-confetti"></div>
+  <div class="sun-confetti"></div>
+  <div class="sun-confetti"></div>
+  <div class="sun-confetti"></div>
+  <div class="sun-confetti"></div>
+  <div class="sun-confetti"></div>
+  <div class="sun-confetti"></div>
+  <div class="sun-confetti"></div>
 
   <script>
     // Establecer la fecha objetivo (21 de junio)
