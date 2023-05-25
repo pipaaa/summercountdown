@@ -5,12 +5,9 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-image: url('summer.wall.jpg');
-      background-size: cover;
-      background-position: center;
       text-align: center;
       padding-top: 100px;
-      overflow: hidden; /* Evitar que el confeti se desborde */
+      overflow: hidden;
     }
 
     h1 {
@@ -29,6 +26,38 @@
       margin-top: 20px;
       color: #fff;
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .confetti-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: #ffdb58;
+      border-radius: 50%;
+      pointer-events: none;
+      transform: rotateZ(45deg);
+      animation: confetti-fall 3s ease-in-out infinite;
+    }
+
+    @keyframes confetti-fall {
+      0% {
+        transform: translateY(-100vh) rotateZ(45deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotateZ(45deg);
+        opacity: 0;
+      }
     }
 
     .video-container {
@@ -51,6 +80,65 @@
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     }
 
+    .tips-section {
+      margin-top: 40px;
+    }
+
+    .tips-section h3 {
+      font-size: 24px;
+      color: #fff;
+    }
+
+    .tips-section ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 20px 0;
+    }
+
+    .tips-section li {
+      font-size: 18px;
+      color: #fff;
+      text-align: left;
+      margin-bottom: 10px;
+    }
+
+    .destinations-section {
+      margin-top: 40px;
+    }
+
+    .destinations-section h3 {
+      font-size: 24px;
+      color: #fff;
+    }
+
+    .destination {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .destination-image {
+      width: 300px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+
+    .destination-info {
+      margin-left: 20px;
+    }
+
+    .destination-info h4 {
+      font-size: 20px;
+      color: #fff;
+    }
+
+    .destination-info p {
+      font-size: 16px;
+      color: #fff;
+    }
+
     footer {
       font-family: "Helvetica Neue", Arial, sans-serif;
       font-size: 14px;
@@ -58,9 +146,6 @@
       margin-top: 20px;
       background-color: #fff;
       padding: 10px;
-      position: fixed;
-      bottom: 0;
-      width: 100%;
     }
 
     .rights-reserved {
@@ -68,40 +153,12 @@
       font-weight: bold;
       font-size: 16px;
     }
-
-    .confetti-container {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-    }
-
-    .confetti {
-      position: absolute;
-      width: 10px;
-      height: 10px;
-      background-color: yellow;
-      border-radius: 50%;
-      animation: fall linear infinite;
-    }
-
-    @keyframes fall {
-      0% {
-        transform: translate(0, -100vh);
-      }
-      100% {
-        transform: translate(0, 100vh);
-      }
-    }
   </style>
 </head>
 <body>
   <h1>Summer Countdown</h1>
   <div class="countdown" id="countdown"></div>
   <div class="message">¡El verano está llegando pronto!</div>
-
-  <div class="confetti-container"></div>
 
   <div class="video-container">
     <h2>Canción del Verano</h2>
@@ -111,26 +168,61 @@
     </video>
   </div>
 
+  <div class="confetti-container"></div>
+
+  <section class="tips-section">
+    <h3>Consejos de Verano</h3>
+    <ul>
+      <li>Mantente hidratado bebiendo mucha agua.</li>
+      <li>Usa protector solar para proteger tu piel.</li>
+      <li>Viste ropa ligera y fresca.</li>
+      <li>Disfruta de actividades al aire libre como nadar, hacer senderismo y jugar deportes.</li>
+      <li>Explora nuevos lugares y disfruta de las vacaciones.</li>
+    </ul>
+  </section>
+
+  <section class="destinations-section">
+    <h3>Destinos de Verano</h3>
+    <div class="destination">
+      <img class="destination-image" src="destino1.jpg" alt="Destino 1">
+      <div class="destination-info">
+        <h4>Destino 1</h4>
+        <p>Descripción del destino 1.</p>
+      </div>
+    </div>
+    <div class="destination">
+      <img class="destination-image" src="destino2.jpg" alt="Destino 2">
+      <div class="destination-info">
+        <h4>Destino 2</h4>
+        <p>Descripción del destino 2.</p>
+      </div>
+    </div>
+    <div class="destination">
+      <img class="destination-image" src="destino3.jpg" alt="Destino 3">
+      <div class="destination-info">
+        <h4>Destino 3</h4>
+        <p>Descripción del destino 3.</p>
+      </div>
+    </div>
+  </section>
+
   <footer>
     <p class="rights-reserved">© 2023. Todos los derechos reservados.</p>
   </footer>
 
-  <audio autoplay loop>
+  <audio autoplay loop volume="0.1">
     <source src="musica.mp3" type="audio/mpeg">
     Tu navegador no admite el elemento de audio.
   </audio>
 
   <script>
     // Establecer la fecha objetivo (21 de junio)
-    var targetDate = new Date('June 21, 2023 00:00:00').getTime();
+    var targetDate = new Date('June 21, 2023 00:00:00');
 
-    // Actualizar la cuenta regresiva cada segundo
-    var countdown = setInterval(function() {
-      // Obtener la fecha y hora actual
-      var now = new Date().getTime();
-
-      // Calcular la diferencia entre la fecha objetivo y la fecha actual
-      var difference = targetDate - now;
+    // Función para mostrar la cuenta regresiva
+    function showCountdown() {
+      var currentDate = new Date();
+      var difference = targetDate - currentDate;
 
       // Calcular los días, horas, minutos y segundos restantes
       var days = Math.floor(difference / (1000 * 60 * 60 * 24));
@@ -139,16 +231,25 @@
       var seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
       // Mostrar el tiempo restante en el elemento con el ID 'countdown'
-      document.getElementById('countdown').innerHTML = days + 'd ' + hours + 'h ' + minutes + 'm ' + seconds + 's ';
+      document.getElementById('countdown').innerHTML = days + 'd ' + hours + 'h ' + minutes + 'm ' + seconds + 's';
 
       // Si la cuenta regresiva ha terminado, mostrar un mensaje
       if (difference < 0) {
         clearInterval(countdown);
         document.getElementById('countdown').innerHTML = '¡El verano está aquí!';
       }
-    }, 1000);
+    }
 
-    // Generar confeti cayendo
+    // Actualizar la cuenta regresiva cada segundo
+    var countdown = setInterval(showCountdown, 1000);
+
+    // Obtener el elemento de audio
+    var audio = document.getElementsByTagName('audio')[0];
+
+    // Establecer el volumen al máximo
+    audio.volume = 0.1;
+
+    // Crear confeti
     var confettiContainer = document.querySelector('.confetti-container');
 
     function createConfetti() {
@@ -156,15 +257,17 @@
       confetti.className = 'confetti';
       confetti.style.left = Math.random() * 100 + 'vw';
       confetti.style.animationDuration = Math.random() * 3 + 2 + 's';
+      confetti.style.animationDelay = Math.random() * 2 + 's';
       confettiContainer.appendChild(confetti);
 
-      setTimeout(function() {
-        confetti.remove();
-      }, 5000);
+      // Eliminar el confeti después de que haya caído
+      confetti.addEventListener('animationend', function() {
+        confettiContainer.removeChild(confetti);
+      });
     }
 
+    // Lanzar confeti cada 200ms
     setInterval(createConfetti, 200);
-
   </script>
 </body>
 </html>
